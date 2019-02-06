@@ -1,0 +1,23 @@
+{
+  "name": "cognitoscript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.b2xcare.com/projectx/congitoScript.git"
+  },
+  "author": "Pravin Lolage <pravindot17@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "amazon-cognito-identity-js": "^3.0.7",
+    "aws-sdk": "^2.390.0",
+    "aws4": "^1.8.0",
+    "node-fetch": "^2.3.0",
+    "request": "^2.88.0"
+  }
+}
