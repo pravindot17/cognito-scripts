@@ -1,23 +1,17 @@
 {
   "name": "cognitoscript",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://git.b2xcare.com/projectx/congitoScript.git"
-  },
-  "author": "Pravin Lolage <pravindot17@gmail.com>",
-  "license": "ISC",
-  "devDependencies": {},
   "dependencies": {
-    "amazon-cognito-identity-js": "^3.0.7",
-    "aws-sdk": "^2.390.0",
-    "aws4": "^1.8.0",
-    "node-fetch": "^2.3.0",
-    "request": "^2.88.0"
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.0",
+    "sticky-session": "^1.1.2"
   }
 }

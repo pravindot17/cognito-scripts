@@ -1,16 +1,16 @@
-let AWS = require('aws-sdk')
+// let AWS = require('aws-sdk')
 global.fetch = require('node-fetch')
 
 let AmazonCognitoIdentity = require('amazon-cognito-identity-js')
 let authenticationData = {
-  Username: 'suku',
+  Username: 'pravin',
   Password: '123123123'
 }
 
 let authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData)
 let userPool = new AmazonCognitoIdentity.CognitoUserPool({
-  UserPoolId: 'ap-southeast-1_jPVfhm4UF', // Your user pool id here
-  ClientId: '65n8tu9ia9f8m5rpouv76gpv2d' // Your client id here
+  UserPoolId: 'ap-south-1_cUuQOCPE6', // Your user pool id here
+  ClientId: '757lu0jqjjulpmntrkl9n5sh9u' // Your client id here
 })
 let userData = {
   Username: authenticationData.Username,
@@ -24,31 +24,31 @@ function generateTokens () {
   cognitoUser.authenticateUser(authenticationDetails, {
     onSuccess: async function (result) {
       console.log('Authenticated to Cognito User and Identity Pools!')
-      // let token = result.getIdToken().getJwtToken()
-      // console.log('id token', token)
+      let token = result.getIdToken().getJwtToken()
+      console.log('id token', token)
 
       // POTENTIAL: Region needs to be set if not already set previously elsewhere.
-      AWS.config.region = 'ap-southeast-1'
+      // AWS.config.region = 'ap-southeast-1'
 
-      AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-        IdentityPoolId: 'ap-southeast-1:978369af-f210-4db6-bae4-2944804634ee', // your identity pool id here
-        Logins: {
-          // Change the key below according to the specific region your user pool is in.
-          'cognito-idp.ap-southeast-1.amazonaws.com/ap-southeast-1_jPVfhm4UF': result.getIdToken().getJwtToken()
-        }
-      })
+      // AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+      //   IdentityPoolId: 'ap-southeast-1:978369af-f210-4db6-bae4-2944804634ee', // your identity pool id here
+      //   Logins: {
+      //     // Change the key below according to the specific region your user pool is in.
+      //     'cognito-idp.ap-southeast-1.amazonaws.com/ap-southeast-1_jPVfhm4UF': result.getIdToken().getJwtToken()
+      //   }
+      // })
 
-      AWS.config.credentials.get((error) => {
-        if (error) {
-          // console.log('error', error)
-          console.error('You are not authorized to perform this action')
-        } else {
-          console.log(`Successfully logged with ${authenticationData.Username}!`)
-          console.log('AKI:' + AWS.config.credentials.accessKeyId)
-          console.log('AKS:' + AWS.config.credentials.secretAccessKey)
-          console.log('token:' + AWS.config.credentials.sessionToken)
-        }
-      })
+      // AWS.config.credentials.get((error) => {
+      //   if (error) {
+      //     // console.log('error', error)
+      //     console.error('You are not authorized to perform this action')
+      //   } else {
+      //     console.log(`Successfully logged with ${authenticationData.Username}!`)
+      //     console.log('AKI:' + AWS.config.credentials.accessKeyId)
+      //     console.log('AKS:' + AWS.config.credentials.secretAccessKey)
+      //     console.log('token:' + AWS.config.credentials.sessionToken)
+      //   }
+      // })
     },
 
     onFailure: function (err) {
@@ -64,6 +64,7 @@ function generateTokens () {
 
       // the api doesn't accept this field back
       delete userAttributes.email_verified
+      delete userAttributes.phone_number_verified
 
       // Get these details and call
       cognitoUser.completeNewPasswordChallenge('123123123', userAttributes, this)
